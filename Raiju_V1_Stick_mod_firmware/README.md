@@ -70,16 +70,4 @@ Outputs en logs komen onder:
 
 Stable – ready for hardware testing and tuning
 
-## 🔓 Repository visibility
-
-Om de repository op public te zetten:
-
-### Via GitHub CLI
-
-```bash
-gh repo edit --visibility public
-```
-
-### Via GitHub UI
-
-- Settings → Danger Zone → Change repository visibility → Public
+##
