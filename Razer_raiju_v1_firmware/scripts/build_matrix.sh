@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 set -e
 
-OUTDIR=".build"
-LOGDIR=".build_logs"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$PROJECT_DIR/.." && pwd)"
+
+OUTDIR="$PROJECT_DIR/.build"
+LOGDIR="$PROJECT_DIR/.build_logs"
 
 mkdir -p "$OUTDIR" "$LOGDIR"
 
 # Prefer the repo-local arduino-cli if present; otherwise use whatever is on PATH.
 ARDUINO_CLI="arduino-cli"
-if [[ -x "./.tools/arduino-cli/arduino-cli" ]]; then
-  ARDUINO_CLI="./.tools/arduino-cli/arduino-cli"
+if [[ -x "$REPO_ROOT/.tools/arduino-cli/arduino-cli" ]]; then
+  ARDUINO_CLI="$REPO_ROOT/.tools/arduino-cli/arduino-cli"
 fi
 
 build() {
@@ -23,7 +27,7 @@ build() {
     --fqbn "$fqbn" \
     --build-path "$OUTDIR/$name" \
     --build-property "build.extra_flags=$flags" \
-    ./raiju_tmr_mcp4728 > "$LOGDIR/$name.log" 2>&1
+    "$PROJECT_DIR/raiju_tmr_mcp4728" > "$LOGDIR/$name.log" 2>&1
 
   echo "Done: $name"
 }
