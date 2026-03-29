@@ -1,0 +1,32 @@
+name: Build Matrix
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install arduino-cli
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+
+      - name: Setup cores
+        run: |
+          PHIL_URL="https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
+          arduino-cli core update-index --additional-urls "$PHIL_URL"
+          arduino-cli core install rp2040:rp2040 --additional-urls "$PHIL_URL"
+          arduino-cli core install arduino:mbed_rp2040
+
+      - name: Install libraries
+        run: |
+          arduino-cli lib install "Adafruit MCP4728"
+          arduino-cli lib install "Adafruit BusIO"
+
+      - name: Run build matrix
+        run: |
+          chmod +x scripts/build_matrix.sh
+          ./scripts/build_matrix.sh

@@ -1,0 +1,23 @@
+# Build output
+.build/
+.build_logs/
+
+# Arduino tijdelijke bestanden
+*.elf
+*.bin
+*.hex
+*.map
+
+# macOS / Linux / Windows noise
+.DS_Store
+Thumbs.db
+
+# Local toolchains / editor settings
+.tools/
+.vscode/
+
+# Local extracted/binary artifacts (not source)
+extracted/
+extracted_all/
+extracted_full/
+*.exe
