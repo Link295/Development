@@ -28,5 +28,5 @@ jobs:
 
       - name: Run build matrix
         run: |
-          chmod +x Razer_raiju_v1_firmware/scripts/build_matrix.sh
-          ./Razer_raiju_v1_firmware/scripts/build_matrix.sh
+          chmod +x Raiju_V1_Stick_mod_firmware/scripts/build_matrix.sh
+          ./Raiju_V1_Stick_mod_firmware/scripts/build_matrix.sh
